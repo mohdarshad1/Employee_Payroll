@@ -85,3 +85,32 @@ mysql> select * from employee_payroll
 |  1 | Rick  | 100000 | 2020-10-20 |
 |  2 | Harry | 150000 | 2018-12-15 |
 +----+-------+--------+------------+
+
+#UC6
+
+mysql> ALTER TABLE employee_payroll
+    -> ADD gender varchar(1) NOT NULL AFTER name;
+
+mysql> select * from employee_payroll;
++----+-------+--------+--------+------------+
+| id | name  | gender | salary | start      |
++----+-------+--------+--------+------------+
+|  1 | Rick  |        | 100000 | 2020-10-20 |
+|  2 | Harry |        | 150000 | 2018-12-15 |
+|  3 | David |        | 200000 | 2017-01-01 |
++----+-------+--------+--------+------------+
+
+mysql> UPDATE employee_payroll
+    -> SET gender = 'M'
+    -> WHERE name = 'Rick' OR
+    -> name = 'Harry' OR
+    -> name = 'David'
+
+mysql> select * from employee_payroll;
++----+-------+--------+--------+------------+
+| id | name  | gender | salary | start      |
++----+-------+--------+--------+------------+
+|  1 | Rick  | M      | 100000 | 2020-10-20 |
+|  2 | Harry | M      | 150000 | 2018-12-15 |
+|  3 | David | M      | 200000 | 2017-01-01 |
++----+-------+--------+--------+------------+
