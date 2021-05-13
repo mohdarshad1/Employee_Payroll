@@ -65,3 +65,23 @@ mysql> select * from employee_payroll;
 |  2 | Harry | 150000 | 2018-12-15 |
 |  3 | David | 200000 | 2017-01-01 |
 +----+-------+--------+------------+
+
+#UC5
+
+mysql> SELECT salary FROM employee_payroll
+    -> WHERE name = 'Rick';
++--------+
+| salary |
++--------+
+| 100000 |
++--------+
+
+mysql> select * from employee_payroll
+    -> WHERE start BETWEEN CAST('2018-01-01' AS DATE)
+    -> AND DATE(NOW());
++----+-------+--------+------------+
+| id | name  | salary | start      |
++----+-------+--------+------------+
+|  1 | Rick  | 100000 | 2020-10-20 |
+|  2 | Harry | 150000 | 2018-12-15 |
++----+-------+--------+------------+
