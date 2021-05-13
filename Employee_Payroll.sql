@@ -114,3 +114,108 @@ mysql> select * from employee_payroll;
 |  2 | Harry | M      | 150000 | 2018-12-15 |
 |  3 | David | M      | 200000 | 2017-01-01 |
 +----+-------+--------+--------+------------+
+
+#UC7
+
+mysql> INSERT into employee_payroll(name,gender,salary,start) VALUES
+    -> ("Natalie",'F',175000,'2020-06-18'),
+    -> ('Marie','F',225000,'2019-09-27');
+
+mysql> select * from employee_payroll;
++----+---------+--------+--------+------------+
+| id | name    | gender | salary | start      |
++----+---------+--------+--------+------------+
+|  1 | Rick    | M      | 100000 | 2020-10-20 |
+|  2 | Harry   | M      | 150000 | 2018-12-15 |
+|  3 | David   | M      | 200000 | 2017-01-01 |
+|  4 | Natalie | F      | 175000 | 2020-06-18 |
+|  5 | Marie   | F      | 225000 | 2019-09-27 |
++----+---------+--------+--------+------------+
+
+mysql> SELECT SUM(salary) FROM employee_payroll
+    -> WHERE gender = 'M'
+    -> GROUP BY gender;
++-------------+
+| SUM(salary) |
++-------------+
+|      450000 |
++-------------+
+
+mysql> SELECT SUM(salary) FROM employee_payroll
+    -> WHERE gender = 'F'
+    -> GROUP BY gender;
++-------------+
+| SUM(salary) |
++-------------+
+|      400000 |
++-------------+
+
+mysql> SELECT AVG(salary) FROM employee_payroll
+    -> WHERE gender = 'M'
+    -> GROUP BY gender;
++-------------+
+| AVG(salary) |
++-------------+
+|      150000 |
++-------------+
+
+mysql> SELECT AVG(salary) FROM employee_payroll
+    -> WHERE gender = 'F'
+    -> GROUP BY gender;
++-------------+
+| AVG(salary) |
++-------------+
+|      200000 |
++-------------+
+
+mysql> SELECT MIN(salary) FROM employee_payroll
+    -> WHERE gender = 'M'
+    -> GROUP BY gender;
++-------------+
+| MIN(salary) |
++-------------+
+|      100000 |
++-------------+
+
+mysql> SELECT MIN(salary) FROM employee_payroll
+    -> WHERE gender = 'F'
+    -> GROUP BY gender;
++-------------+
+| MIN(salary) |
++-------------+
+|      175000 |
++-------------+
+
+mysql> SELECT MAX(salary) FROM employee_payroll
+    -> WHERE gender = 'M'
+    -> GROUP BY gender;
++-------------+
+| MAX(salary) |
++-------------+
+|      200000 |
++-------------+
+
+mysql> SELECT MAX(salary) FROM employee_payroll
+    -> WHERE gender = 'F'
+    -> GROUP BY gender;
++-------------+
+| MAX(salary) |
++-------------+
+|      225000 |
++-------------+
+
+mysql> SELECT COUNT(*) FROM employee_payroll
+    -> WHERE gender = 'M';
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+
+mysql> SELECT COUNT(*) FROM employee_payroll
+    -> WHERE gender = 'F';
++----------+
+| COUNT(*) |
++----------+
+|        2 |
++----------+
