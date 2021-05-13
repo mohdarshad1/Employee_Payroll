@@ -47,3 +47,19 @@ mysql> describe employee_payroll;
 | salary | double       | NO   |     | NULL    |                |
 | start  | date         | NO   |     | NULL    |                |
 +--------+--------------+------+-----+---------+----------------+
+
+#UC3
+
+mysql> INSERT into employee_payroll(name,salary,start)
+    -> values("Rick",100000,'2020-10-20'),
+    -> ('Harry',150000,'2018-12-15'),
+    -> ('David',200000,'2017-01-01');
+
+mysql> select * from employee_payroll;
++----+-------+--------+------------+
+| id | name  | salary | start      |
++----+-------+--------+------------+
+|  1 | Rick  | 100000 | 2020-10-20 |
+|  2 | Harry | 150000 | 2018-12-15 |
+|  3 | David | 200000 | 2017-01-01 |
++----+-------+--------+------------+
