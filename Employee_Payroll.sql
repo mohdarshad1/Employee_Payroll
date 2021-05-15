@@ -247,3 +247,29 @@ mysql> DESC employee_payroll;
 | start          | date            | NO   |     | NULL    |                |
 +----------------+-----------------+------+-----+---------+----------------+
 
+#UC9
+
+mysql> ALTER TABLE employee_payroll RENAME COLUMN salary TO basic_pay;
+mysql> ALTER TABLE employee_payroll ADD deductions DOUBLE NOT NULL AFTER basic_pay;
+mysql> ALTER TABLE employee_payroll ADD taxable_pay DOUBLE NOT NULL AFTER deductions;
+mysql> ALTER TABLE employee_payroll ADD tax DOUBLE NOT NULL AFTER taxable_pay;
+mysql> ALTER TABLE employee_payroll ADD net_pay DOUBLE NOT NULL AFTER tax;
+
+mysql> desc employee_payroll;
++----------------+-----------------+------+-----+---------+----------------+
+| Field          | Type            | Null | Key | Default | Extra          |
++----------------+-----------------+------+-----+---------+----------------+
+| id             | int unsigned    | NO   | PRI | NULL    | auto_increment |
+| name           | varchar(150)    | NO   |     | NULL    |                |
+| phone_number   | bigint unsigned | YES  |     | NULL    |                |
+| emp_department | varchar(150)    | NO   |     | NULL    |                |
+| address        | varchar(150)    | YES  |     | TBD     |                |
+| gender         | varchar(1)      | NO   |     | NULL    |                |
+| basic_pay      | double          | NO   |     | NULL    |                |
+| deductions     | double          | NO   |     | NULL    |                |
+| taxable_pay    | double          | NO   |     | NULL    |                |
+| tax            | double          | NO   |     | NULL    |                |
+| net_pay        | double          | NO   |     | NULL    |                |
+| start          | date            | NO   |     | NULL    |                |
++----------------+-----------------+------+-----+---------+----------------+
+
