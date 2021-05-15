@@ -219,3 +219,31 @@ mysql> SELECT COUNT(*) FROM employee_payroll
 +----------+
 |        2 |
 +----------+
+
+#UC8
+
+mysql> ALTER TABLE employee_payroll
+    -> ADD phone_number BIGINT unsigned AFTER name;
+
+mysql> ALTER TABLE employee_payroll
+    -> ADD emp_department VARCHAR(150) NOT NULL AFTER phone_number;
+
+mysql> ALTER TABLE employee_payroll
+    -> ADD address VARCHAR(150) AFTER emp_department;
+
+mysql> AFTER TABLE employee_payroll ALTER address DEFAULT 'TBD';
+
+mysql> DESC employee_payroll;
++----------------+-----------------+------+-----+---------+----------------+
+| Field          | Type            | Null | Key | Default | Extra          |
++----------------+-----------------+------+-----+---------+----------------+
+| id             | int unsigned    | NO   | PRI | NULL    | auto_increment |
+| name           | varchar(150)    | NO   |     | NULL    |                |
+| phone_number   | bigint unsigned | YES  |     | NULL    |                |
+| emp_department | varchar(150)    | NO   |     | NULL    |                |
+| address        | varchar(150)    | YES  |     | TBD     |                |
+| gender         | varchar(1)      | NO   |     | NULL    |                |
+| salary         | double          | NO   |     | NULL    |                |
+| start          | date            | NO   |     | NULL    |                |
++----------------+-----------------+------+-----+---------+----------------+
+
