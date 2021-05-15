@@ -327,3 +327,107 @@ mysql> INSERT INTO employee_department VALUES (101,203),(102,201),(102,202),(103
 
 mysql> INSERT INTO payroll VALUES (101,50000,5000,45000,5000,40000),(102,20000,2000,18000,3000,15000),(103,60000,6000,54000,4000,50000);
 
+#UC12
+
+mysql> select * from company;
++------------+--------------+
+| company_id | company_name |
++------------+--------------+
+|          1 | Capgemini    |
+|          2 | Company B    |
+|          3 | Company C    |
++------------+--------------+
+
+mysql> INSERT INTO employee VALUES (101,1,'Bill','9876543210','California','M'),(102,1,'Terisa','8876543211','San Francisco','F'),(103,2,'Charlie','7876543212','New York','M');
+
+mysql> SELECT * FROM employee;
++-----+------------+---------------+--------------+---------------+--------+
+| id  | company_id | employee_name | phone_number | address       | gender |
++-----+------------+---------------+--------------+---------------+--------+
+| 101 |          1 | Bill          | 9876543210   | California    | M      |
+| 102 |          1 | Terisa        | 8876543211   | San Francisco | F      |
+| 103 |          2 | Charlie       | 7876543212   | New York      | M      |
++-----+------------+---------------+--------------+---------------+--------+
+
+mysql> INSERT INTO department VALUES (101,'Sales'),(102,'Marketing'),(103,'Logistics'),(104,'Management');
+
+mysql> select * from department;
++---------+------------+
+| dept_id | dept_name  |
++---------+------------+
+|     201 | Sales      |
+|     202 | Marketing  |
+|     203 | Logistics  |
+|     204 | Management |
++---------+------------+
+
+mysql> INSERT INTO employee_department VALUES (101,203),(102,201),(102,202),(103,204);
+
+mysql> Select * from employee_department;
++--------+---------+
+| emp_id | dept_id |
++--------+---------+
+|    101 |     203 |
+|    102 |     201 |
+|    102 |     202 |
+|    103 |     204 |
++--------+---------+
+
+mysql> INSERT INTO payroll VALUES (101,50000,5000,45000,5000,40000),(102,20000,2000,18000,3000,15000),(103,60000,6000,54000,4000,50000);
+
+mysql> select * from payroll;
++--------+-----------+------------+-------------+------+---------+
+| emp_id | basic_pay | deductions | taxable_pay | TAX  | NET_PAY |
++--------+-----------+------------+-------------+------+---------+
+|    101 |     50000 |       5000 |       45000 | 5000 |   40000 |
+|    102 |     20000 |       2000 |       18000 | 3000 |   15000 |
+|    103 |     60000 |       6000 |       54000 | 4000 |   50000 |
++--------+-----------+------------+-------------+------+---------+
+
+SELECT gender,COUNT(id) FROM employee 			
+GROUP BY gender;
++--------+-----------+
+| gender | COUNT(id) |
++--------+-----------+
+| M      |         2 |
+| F      |         1 |
++--------+-----------+
+
+SELECT net_pay FROM PAYROLL WHERE emp_id =(SELECT id FROM employee where gender = 'F');
++---------+
+| net_pay |
++---------+
+|   15000 |
++---------+
+
+SELECT SUM(p.net_pay) FROM employee e left join payroll p on  p.emp_id = e.id GROUP BY e.gender;
++----------------+
+| SUM(p.net_pay) |
++----------------+
+|          90000 |
+|          15000 |
++----------------+
+
+SELECT AVG(p.net_pay) FROM employee e left join payroll p on  p.emp_id = e.id GROUP BY e.gender;
++----------------+
+| AVG(p.net_pay) |
++----------------+
+|          45000 |
+|          15000 |
++----------------+
+
+SELECT MAX(p.net_pay) FROM employee e left join payroll p on  p.emp_id = e.id GROUP BY e.gender;
++----------------+
+| MAX(p.net_pay) |
++----------------+
+|          50000 |
+|          15000 |
++----------------+
+
+SELECT MIN(p.net_pay) FROM employee e left join payroll p on  p.emp_id = e.id GROUP BY e.gender;
++----------------+
+| MIN(p.net_pay) |
++----------------+
+|          40000 |
+|          15000 |
++----------------+
