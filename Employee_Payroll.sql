@@ -273,3 +273,57 @@ mysql> desc employee_payroll;
 | start          | date            | NO   |     | NULL    |                |
 +----------------+-----------------+------+-----+---------+----------------+
 
+#UC11
+
+mysql> USE payroll_service;
+
+mysql> CREATE TABLE company(
+-> company_id INT NOT NULL,
+-> company_name VARCHAR(30) NOT NULL,
+-> PRIMARY KEY(company_id));
+
+mysql> INSERT INTO company VALUES(1,'Facebook'),(2,'Google'),(3,'Apple');
+
+mysql> CREATE TABLE department(
+-> dept_id INT NOT NULL,
+-> dept_name VARCHAR(50) NOT NULL,
+-> PRIMARY KEY(dept_id));
+
+mysql> INSERT INTO department VALUES (101,'Sales'),(102,'Marketing'),(103,'Logistics'),(104,'Management');
+
+mysql> CREATE TABLE employee(
+-> id INT NOT NULL,
+-> company_id INT NOT NULL,
+-> employee_name VARCHAR(30) NOT NULL,
+-> phone_number VARCHAR(30) NOT NULL,
+-> address VARCHAR(150) NOT NULL DEFAULT 'TBD',
+-> gender VARCHAR(1) NOT NULL,
+-> PRIMARY KEY(id),
+-> CONSTRAINT FK FOREIGN KEY(company_id) REFERENCES company(company_id));
+
+mysql> INSERT INTO employee VALUES (101,1,'Bill','9876543210','California','M'),(102,1,'Terisa','8876543211','San Francisco','F'),(103,2,'Charlie','7876543212','New York','M');
+
+mysql> CREATE TABLE employee_department(
+  -> emp_id INT NOT NULL,
+  -> dept_id INT NOT NULL,
+  -> PRIMARY KEY (emp_id,dept_id),
+  -> FOREIGN KEY (dept_id) REFERENCES department (dept_id),
+  -> FOREIGN KEY (emp_id) REFERENCES employee (id),
+  -> FOREIGN KEY (dept_id) REFERENCES department (dept_id)
+);
+
+mysql> INSERT INTO employee_department VALUES (101,203),(102,201),(102,202),(103,204);
+
+
+-> CREATE TABLE payroll (
+-> emp_id INT DEFAULT NULL,
+-> basic_pay DOUBLE NOT NULL,
+-> deductions DOUBLE NOT NULL,
+-> taxable_pay DOUBLE NOT NULL,
+-> tax DOUBLE NOT NULL,
+-> net_pay DOUBLE NOT NULL
+);
+
+
+mysql> INSERT INTO payroll VALUES (101,50000,5000,45000,5000,40000),(102,20000,2000,18000,3000,15000),(103,60000,6000,54000,4000,50000);
+
